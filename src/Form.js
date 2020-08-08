@@ -7,6 +7,15 @@ const Form = (props) => {
     role: props.role,
   });
 
+const somethingChanged = (event) => {
+    setMember({
+            name: event.target.value,
+            email: event.target.value,
+            role: event.target.value
+           });
+         };
+
+
   return (
     <>
       <h1>Join The Team!</h1>
