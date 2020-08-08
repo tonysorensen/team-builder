@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Form from "./Form"
+import Form from "./Form";
 
 function App() {
   const [members, setMembers] = useState({
@@ -9,15 +9,12 @@ function App() {
     email: "tony48853@gmail.com",
     role: "Project Lead",
   });
-
-const newMember = (member) => {
-  
+const addNewMember =(member)=> {
+  setMembers([...members, {...member, id: Date.now()}])
 }
-
-
   return (
     <div className="App">
-      <Form />   
+      <Form addNewMember={addNewMember}/>
     </div>
   );
 }
