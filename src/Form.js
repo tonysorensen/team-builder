@@ -6,21 +6,24 @@ const Form = (props) => {
     email: props.email,
     role: props.role,
   });
-
+console.log('form props', props)
 const somethingChanged = (event) => {
-    setMember({
-            name: event.target.value,
-            email: event.target.value,
-            role: event.target.value
-           });
-         };
-
-
+    console.log("handled change", event.target.value);
+    const newStateObj = { ...member, [event.target.name]: event.target.value}
+    setMember(newStateObj)
+}
+const submitForm = (event) => {
+    event.preventDefault();
+    props.addNewMember(member);
+    setMember({name:"",email:"",role:""})
+}
+console.log('member',member)
   return (
     <>
       <h1>Join The Team!</h1>
 
-      <form className="form">
+      <form className="form"
+      onSubmit={submitForm}>
         <label htmlFor="name">Name</label>
         <input
           className="input"
@@ -28,7 +31,8 @@ const somethingChanged = (event) => {
           type="text"
           name="name"
           placeholder="Enter Your Name"
-          value={props.name}
+          value={member.name}
+          onChange={somethingChanged}
         />
         <label htmlFor="email">Email</label>
         <input
@@ -37,7 +41,8 @@ const somethingChanged = (event) => {
           type="email"
           name="email"
           placeholder="Enter Your Email"
-          value={props.email}
+          value={member.email}
+          onChange={somethingChanged}
         />
         <label htmlFor="role">Role</label>
         <input
@@ -46,9 +51,10 @@ const somethingChanged = (event) => {
           type="text"
           name="role"
           placeholder="Enter Your Role"
-          value={props.role}
+          value={member.role}
+          onChange={somethingChanged}
         />
-        <button className="button">Submit</button>
+        <button type="submit" className="button">Submit</button>
       </form>
     </>
   );
